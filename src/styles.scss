@@ -1,0 +1,21 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~bootstrap/scss/bootstrap";
+
+html, body {
+  font-family: 'Source Sans Pro', sans-serif;
+  background-color: aliceblue;
+}
+
+.fa, .fas, .far {
+  cursor: pointer;
+}
+
+input, select {
+  border-bottom: 2px solid lightgrey !important;
+  margin-top: 2px;
+}
+
+select.form-control {
+  -webkit-appearance: none;
+}

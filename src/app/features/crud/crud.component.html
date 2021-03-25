@@ -1,0 +1,41 @@
+<form #f="ngForm" (ngSubmit)="saveHandler(f)" class="form-row">
+
+  {{store$ | async | json}}
+
+  <input placeholder="Expense Description" type="text" name="title"
+         [ngModel] class="form-control col-12 col-md-6 col-lg-4" required>
+
+  <input placeholder="Description" type="text" name="description"
+         [ngModel] class="form-control col-12 col-md-6 col-lg-4" required>
+
+  <input placeholder="Author" type="text" name="author"
+         [ngModel] class="form-control col-12 col-md-6 col-lg-4" required>
+
+  <input placeholder="Category" type="text" name="category"
+         [ngModel] class="form-control col-12 col-md-6 col-lg-4" required>
+
+  <input placeholder="Price ($)" type="number" name="price"
+         [ngModel] class="form-control col-12 col-md-6 col-lg-4" required>
+
+  <!--    <select [ngModel] name="category" class="form-control" required>-->
+  <!--      <option [value]="null">Select Category</option>-->
+  <!--      <option *ngFor="let category of categories">{{category}}</option>-->
+  <!--    </select>-->
+
+  <div class="col-12 text-center py-3">
+
+    <button class="btn btn-primary" type="submit" [disabled]="f.invalid || !f.dirty">
+      SAVE
+    </button>
+
+    <button class="btn btn-outline-info mx-5" type="button" (click)="f.reset()">
+      CLEAN
+    </button>
+
+    <button class="btn btn-secondary" type="button" (click)="deleteItem(id)">
+      DELETE
+    </button>
+
+  </div>
+
+</form>

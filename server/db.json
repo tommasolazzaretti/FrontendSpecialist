@@ -1,0 +1,20 @@
+{
+  "books": [
+    {
+      "title": "1",
+      "description": "1",
+      "author": "1",
+      "category": "1",
+      "price": 1,
+      "id": 1
+    },
+    {
+      "title": "titolo",
+      "description": "descrizione",
+      "author": "autore",
+      "category": "categoria",
+      "price": 100,
+      "id": 2
+    }
+  ]
+}
