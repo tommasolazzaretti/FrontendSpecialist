@@ -10,6 +10,7 @@ export class ConfirmModalComponent implements OnInit {
   @Output() cancel: EventEmitter<void> = new EventEmitter();
   @Input() title: string;
   @Input() bodyText: string;
+  @Input() showModal: boolean;
 
   constructor() {
   }

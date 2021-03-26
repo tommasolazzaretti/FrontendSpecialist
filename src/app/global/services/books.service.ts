@@ -10,8 +10,15 @@ export class BooksService {
   constructor(private http: HttpClient) {
   }
 
-  loadBooks(): Observable<Book[]> {
-    return this.http.get<Book[]>('http://localhost:3000/books');
+  loadBooks(params?: { title?: string, author?: string }): Observable<Book[]> {
+    let uri = 'http://localhost:3000/books?';
+    console.log('params   ', params);
+    if (params) {
+      Object.keys(params).forEach(key => {
+        uri = params[key] ? uri.concat(key + '=' + params[key] + '&') : uri;
+      });
+    }
+    return this.http.get<Book[]>(uri);
   }
 
   getBook(id: number): Observable<Book> {

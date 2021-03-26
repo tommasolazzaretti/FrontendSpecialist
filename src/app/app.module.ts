@@ -11,6 +11,7 @@ import {NavbarComponent} from './global/components/navbar/navbar.component';
 import {LoaderComponent} from './global/components/loader/loader.component';
 import {BOOK_FEATURE_KEY} from './store/reducers/books.reducer';
 import {booksEffects} from './store/effects';
+import {CompositionGuard} from './global/guard/can-deactivate.guard';
 
 export interface AppState {
   auth: { token: string, role: string };
@@ -36,11 +37,12 @@ export interface AppState {
       {path: '', loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule)},
       {
         path: 'crud',
-        loadChildren: () => import('./features/crud/crud.module').then(m => m.CrudModule)
+        loadChildren: () => import('./features/crud/crud.module').then(m => m.CrudModule),
+        canDeactivate: [CompositionGuard]
       },
     ])
   ],
-  providers: [],
+  providers: [CompositionGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {

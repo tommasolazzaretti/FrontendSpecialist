@@ -16,7 +16,10 @@ export enum ItemsActionTypes {
   DeleteBookFail = '[Book] Delete Book Fail',
 }
 
-export const loadBooks = createAction(ItemsActionTypes.LoadBooks);
+export const loadBooks = createAction(
+  ItemsActionTypes.LoadBooks,
+  props<{ data?: { title?: string, author?: string } }>()
+);
 
 export const loadBooksSuccess = createAction(
   ItemsActionTypes.LoadBooksSuccess,

@@ -1,24 +1,34 @@
 <form #f="ngForm" (ngSubmit)="saveHandler(f)" class="form-row">
 
-  <input placeholder="Expense Description" type="text" name="title"
-         [ngModel]="book.title" class="form-control col-12 col-md-6 col-lg-4" required>
+  <div class="col-12 col-md-6 col-lg-4">
+    <input placeholder="Expense Description" type="text" name="title"
+           [ngModel]="book.title" class="form-control" required>
+  </div>
 
-  <input placeholder="Description" type="text" name="description"
-         [ngModel] class="form-control col-12 col-md-6 col-lg-4" required>
+  <div class="col-12 col-md-6 col-lg-4">
+    <input placeholder="Title" type="text" name="title"
+           [ngModel]="book.title" class="form-control" required>
+  </div>
 
-  <input placeholder="Author" type="text" name="author"
-         [ngModel] class="form-control col-12 col-md-6 col-lg-4" required>
+  <div class="col-12 col-md-6 col-lg-4">
+    <input placeholder="Description" type="text" name="description"
+           [ngModel]="book.description" class="form-control" required>
+  </div>
 
-  <input placeholder="Category" type="text" name="category"
-         [ngModel] class="form-control col-12 col-md-6 col-lg-4" required>
+  <div class="col-12 col-md-6 col-lg-4">
+    <input placeholder="Author" type="text" name="author"
+           [ngModel]="book.author" class="form-control" required>
+  </div>
 
-  <input placeholder="Price ($)" type="number" name="price"
-         [ngModel] class="form-control col-12 col-md-6 col-lg-4" required>
+  <div class="col-12 col-md-6 col-lg-4">
+    <input placeholder="Category" type="text" name="category"
+           [ngModel]="book.category" class="form-control" required>
+  </div>
 
-  <!--    <select [ngModel] name="category" class="form-control" required>-->
-  <!--      <option [value]="null">Select Category</option>-->
-  <!--      <option *ngFor="let category of categories">{{category}}</option>-->
-  <!--    </select>-->
+  <div class="col-12 col-md-6 col-lg-4">
+    <input placeholder="Price ($)" type="number" name="price"
+           [ngModel]="book.price" class="form-control" required>
+  </div>
 
   <div class="col-12 text-center py-3">
 
@@ -26,7 +36,7 @@
       SAVE
     </button>
 
-    <button class="btn btn-outline-info mx-5" type="button" (click)="f.reset()">
+    <button class="btn btn-outline-info mx-5" *ngIf="!id" type="button" (click)="f.reset()">
       CLEAN
     </button>
 
@@ -38,6 +48,9 @@
 
 </form>
 
-<div>
-  {{books$ | async | json}}
-</div>
+<!--<app-confirm-modal-->
+<!--  (cancel)="cancel()"-->
+<!--  (confirm)="confirm()"-->
+<!--  [showModal]="showModal"-->
+<!--  [title]="'titolo'"-->
+<!--  />-->

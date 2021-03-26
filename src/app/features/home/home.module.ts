@@ -5,6 +5,7 @@ import {HomeComponent} from './home.component';
 import {StoreModule} from '@ngrx/store';
 import {ItemCardModule} from '../../global/components/item-card/item-card.module';
 import {bookReducer} from '../../store/reducers/books.reducer';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [HomeComponent],
@@ -13,6 +14,7 @@ import {bookReducer} from '../../store/reducers/books.reducer';
     HomeRoutingModule,
     StoreModule.forFeature('state', bookReducer),
     ItemCardModule,
+    FormsModule,
   ],
   providers: []
 })

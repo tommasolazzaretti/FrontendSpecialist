@@ -2,6 +2,7 @@ import {ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation} from '@an
 import {select, Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
 import {AppState} from '../../../app.module';
+import {BOOK_FEATURE_KEY} from '../../../store/reducers/books.reducer';
 
 @Component({
   selector: 'app-loader',
@@ -21,11 +22,12 @@ import {AppState} from '../../../app.module';
 export class LoaderComponent implements OnInit {
 
   isLoading: Observable<any>;
+  // loaded$: Observable<boolean> = this.store.pipe(select(selectEntityLoaded));
 
   constructor(private store: Store<AppState>) {
 
     this.isLoading = this.store.pipe(
-      select((state: AppState) => state.ui.isLoading)
+      select((state: AppState) => state[BOOK_FEATURE_KEY].loaded)
     );
 
     this.isLoading.subscribe(data => console.log(data));

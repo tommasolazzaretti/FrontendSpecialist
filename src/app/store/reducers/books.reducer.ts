@@ -27,45 +27,46 @@ export const initialState: State = adapter.getInitialState({
 const reducer = createReducer(
   initialState,
   on(fromBookActions.loadBooksSuccess, (state, {data}) => {
-    console.log('loadBooksSuccess state ', state);
-    return adapter.addMany(data, {
+    return adapter.setAll(data, {
       ...state,
-      loaded: true
+      loaded: false
     });
   }),
   on(fromBookActions.loadBooksFail, (state, {error}) => {
     return {
       ...state,
+      loaded: false,
       error
     };
   }),
   on(fromBookActions.loadBookSuccess, (state, {item}) => {
     return {
       ...state,
+      loaded: false,
       selectedItem: item
     };
   }),
   on(fromBookActions.loadBookFail, (state, {error}) => {
     return {
       ...state,
+      loaded: false,
       selectedItem: null,
       error
     };
   }),
   on(fromBookActions.deleteBookSuccess, (state) => {
     const clonedState = _.cloneDeep(state);
-    delete clonedState.entities[state.selectedItem.id];
-    console.log('state ', state);
-    console.log('clonedState ', clonedState);
-    return {
+    clonedState.ids = clonedState.ids.filter((id) => id !== state.selectedItem.id);
+    return adapter.removeOne(clonedState, {
       ...clonedState,
-      selectedItem: null,
-    };
+      loaded: false
+    });
   }),
   on(fromBookActions.deleteBookFail, (state, {error}) => {
     return {
       ...state,
       selectedItem: null,
+      loaded: false,
       error
     };
   })

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {of} from 'rxjs';
-import {catchError, map, mergeMap} from 'rxjs/operators';
+import {catchError, map, mergeMap, tap} from 'rxjs/operators';
 import {fromBookActions} from '../actions/books.actions';
 import {BooksService} from '../../global/services/Books.service';
 
@@ -10,7 +10,7 @@ export class BooksEffects {
 
   loadBooks$ = createEffect(() => this.actions$.pipe(
     ofType(fromBookActions.loadBooks),
-    mergeMap(() => this.booksService.loadBooks()
+    mergeMap((action) => this.booksService.loadBooks(action.data)
       .pipe(
         map(result => fromBookActions.loadBooksSuccess({data: result})),
         catchError((err) => of(fromBookActions.loadBooksFail(err)))
@@ -32,8 +32,8 @@ export class BooksEffects {
     ofType(fromBookActions.saveBook),
     mergeMap(action => this.booksService.addBook(action.data)
       .pipe(
-        map(result => fromBookActions.saveBookSuccess({ data: result })),
-        catchError( (err) => of(fromBookActions.saveBookFail(err)))
+        map(result => fromBookActions.saveBookSuccess({data: result})),
+        catchError((err) => of(fromBookActions.saveBookFail(err)))
       )
     )
   ));
@@ -43,7 +43,7 @@ export class BooksEffects {
     mergeMap((action) => this.booksService.deleteBook(action.id)
       .pipe(
         map(() => fromBookActions.deleteBookSuccess()),
-        catchError( (err) => of(fromBookActions.deleteBookFail(err)))
+        catchError((err) => of(fromBookActions.deleteBookFail(err)))
       )
     )
   ));

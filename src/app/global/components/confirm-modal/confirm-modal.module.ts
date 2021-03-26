@@ -4,6 +4,9 @@ import {ConfirmModalComponent} from './confirm-modal.component';
 
 @NgModule({
   declarations: [ConfirmModalComponent],
+  exports: [
+    ConfirmModalComponent
+  ],
   imports: [
     CommonModule
   ]
