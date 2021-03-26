@@ -1,9 +1,7 @@
 <form #f="ngForm" (ngSubmit)="saveHandler(f)" class="form-row">
 
-  {{store$ | async | json}}
-
   <input placeholder="Expense Description" type="text" name="title"
-         [ngModel] class="form-control col-12 col-md-6 col-lg-4" required>
+         [ngModel]="book.title" class="form-control col-12 col-md-6 col-lg-4" required>
 
   <input placeholder="Description" type="text" name="description"
          [ngModel] class="form-control col-12 col-md-6 col-lg-4" required>
@@ -32,10 +30,14 @@
       CLEAN
     </button>
 
-    <button class="btn btn-secondary" type="button" (click)="deleteItem(id)">
+    <button class="btn btn-secondary" type="button" *ngIf="id" (click)="deleteBook(id)">
       DELETE
     </button>
 
   </div>
 
 </form>
+
+<div>
+  {{books$ | async | json}}
+</div>

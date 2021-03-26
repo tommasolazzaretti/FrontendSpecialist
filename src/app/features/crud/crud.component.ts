@@ -1,10 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Book} from '../../model/book';
-import {Store} from '@ngrx/store';
-import {addItem, deleteItem, getItem} from '../../store/actions/items.actions';
+import {select, Store} from '@ngrx/store';
 import {AppState} from '../../app.module';
-import {NgForm} from '@angular/forms';
+import {FormGroup, NgForm} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs';
+import {getBookById, selectAllBooks, selectEntityCount} from '../../store/selectors/books.selector';
+import {fromBookActions} from '../../store/actions/books.actions';
 
 @Component({
   selector: 'app-crud',
@@ -12,38 +14,42 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./crud.component.scss']
 })
 
-export class CrudComponent implements OnInit {
+export class CrudComponent implements OnInit, OnDestroy {
   id: number = null;
-
-  store$ = this.store.select('items');
+  form: FormGroup;
+  book: Book;
+  books$: Observable<Book[]> = this.store.pipe(select(selectAllBooks));
 
   constructor(private store: Store<AppState>, private route: ActivatedRoute) {
-    const self = this;
     this.route.params.subscribe(params => {
-      this.id = params.id;
-
-      // this.store.pipe(
-      //   select(selectById, self.id)
-      // ).subscribe((item) => console.log('item : ', item));
-
-      this.store.dispatch(getItem({id: this.id}));
-      // console.log('this.store : ', this.store.items);
+      if (params.id) {
+        this.id = params.id;
+        this.store.dispatch(fromBookActions.loadBook({id: params.id}));
+      }
     });
   }
 
   ngOnInit(): void {
+    this.store.pipe(select(getBookById())).subscribe(book => {
+      this.book = book ? book : new Book();
+      console.log('getBookById ', book);
+    });
   }
 
   saveHandler(form: NgForm) {
-    this.saveItem({...form.value});
+    this.saveBook({...form.value});
   }
 
-  saveItem(item: Partial<Book>) {
-    this.store.dispatch(addItem({item}));
+  saveBook(book: Partial<Book>) {
+    this.store.dispatch(fromBookActions.saveBook({data: book}));
   }
 
-  deleteItem(id: number) {
-    this.store.dispatch(deleteItem({id}));
+  deleteBook(id: number) {
+    this.store.dispatch(fromBookActions.deleteBook({id}));
+  }
+
+  ngOnDestroy(): void {
+    this.store.dispatch(fromBookActions.loadBook({id: null}));
   }
 
 }

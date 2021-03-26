@@ -2,20 +2,20 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {StoreModule} from '@ngrx/store';
-import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {FormsModule} from '@angular/forms';
 import {EffectsModule} from '@ngrx/effects';
 import {HttpClientModule} from '@angular/common/http';
-import {reducers} from './store/reducers';
+import {REDUCER_TOKEN} from './store/reducers';
 import {RouterModule} from '@angular/router';
 import {NavbarComponent} from './global/components/navbar/navbar.component';
 import {LoaderComponent} from './global/components/loader/loader.component';
-import {Book} from './model/book';
+import {BOOK_FEATURE_KEY} from './store/reducers/books.reducer';
+import {booksEffects} from './store/effects';
 
 export interface AppState {
   auth: { token: string, role: string };
   ui: { isLoading: boolean };
-  items: Book[];
+  [BOOK_FEATURE_KEY]: any;
 }
 
 @NgModule({
@@ -28,11 +28,10 @@ export interface AppState {
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    StoreModule.forRoot(reducers),
-    StoreDevtoolsModule.instrument({
-      maxAge: 25
-    }),
-    EffectsModule.forRoot([]),
+    // Store modules
+    StoreModule.forRoot(REDUCER_TOKEN),
+    EffectsModule.forRoot([...booksEffects]),
+    // Route modules
     RouterModule.forRoot([
       {path: '', loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule)},
       {

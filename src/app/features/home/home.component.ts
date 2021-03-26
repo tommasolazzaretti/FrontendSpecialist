@@ -1,11 +1,11 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Book} from '../../model/book';
-import {loadItems} from '../../store/actions/items.actions';
 import {select, Store} from '@ngrx/store';
-import {getItems, getTotal} from '../../store/selectors/items.selector';
+import {selectAllBooks, selectEntityCount} from '../../store/selectors/books.selector';
 import {toggleLoader} from '../../store/actions/ui.actions';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
+import {fromBookActions} from '../../store/actions/books.actions';
 
 class HomeState {
   items: Book[];
@@ -18,30 +18,30 @@ class HomeState {
       <h1>DASHBOARD HOME-PAGE</h1>
       <div class="text-center">TOTAL BOOKS: {{total$ | async}}</div>
     </div>
-    <div class="mt-5 row">
-      <div *ngFor="let item of items$ | async" class="col-12 col-md-6 col-lg-4 m-3">
-        <app-item-card [item]="item" (click)="goTo(item?.id)"></app-item-card>
+    <div class="mt-5 row" >
+      <div *ngFor="let book of books$ | async" class="col-12 col-md-6 col-lg-4 px-5 py-3 p-md-3">
+        <app-item-card [item]="book" (click)="goTo(book?.id)"></app-item-card>
       </div>
     </div>
   `,
   styles: []
 })
 
-export class HomeComponent {
-  items$: Observable<Book[]> = this.store.pipe(select(getItems));
-  total$: Observable<number> = this.store.pipe(select(getTotal));
+export class HomeComponent implements OnInit {
+  total$: Observable<number> = this.store.pipe(select(selectEntityCount));
+  books$: Observable<Book[]> = this.store.pipe(select(selectAllBooks));
 
   constructor(private store: Store<HomeState>, private route: Router) {
-    const self = this;
-    this.items$.subscribe(result => console.log('this.items$.length :', result.length));
+  }
 
+  ngOnInit(): void {
     this.store.dispatch(toggleLoader());
     // this.store.dispatch(loadItems());
     // this.store.dispatch(toggleLoader());
 
     setTimeout(() => {
-      self.store.dispatch(loadItems());
-      self.store.dispatch(toggleLoader());
+      this.store.dispatch(fromBookActions.loadBooks());
+      this.store.dispatch(toggleLoader());
     }, 1000);
   }
 
