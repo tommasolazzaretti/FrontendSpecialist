@@ -1,7 +1,7 @@
 {
   "books": [
     {
-      "title": "1",
+      "title": "totilo 1",
       "description": "1",
       "author": "1",
       "category": "1",
@@ -15,6 +15,30 @@
       "category": "1",
       "price": 1,
       "id": 2
+    },
+    {
+      "title": "123",
+      "description": "1",
+      "author": "1",
+      "category": "1",
+      "price": 1,
+      "id": 3
+    },
+    {
+      "title": "Title",
+      "description": "desc",
+      "author": "author",
+      "category": "categia fantasy",
+      "price": 123,
+      "id": 4
+    },
+    {
+      "title": "nuovo",
+      "description": "nuovo",
+      "author": "nuovo",
+      "category": "nuovo",
+      "price": 123,
+      "id": 5
     }
   ]
 }

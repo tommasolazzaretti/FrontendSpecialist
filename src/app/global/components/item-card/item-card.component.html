@@ -1,17 +1,17 @@
-<div class="bg-white shadow p-3 row">
+<div class="bg-white shadow p-3 m-md-3 row">
   <div class="col-12">
-    {{item?.title}}
-  </div>
-
-  <div class="col-12 col-md-6">
-    {{item?.description}}
-  </div>
-
-  <div class="col-12 col-md-6">
-    {{item?.author}} - {{item?.category}}
+    <b>Title : </b>{{item?.title}}
   </div>
 
   <div class="col-12">
-    {{item?.price | currency}}
+    <b>description : </b>{{item?.description}}
+  </div>
+
+  <div class="col-12">
+    <b>author - category : </b>{{item?.author}} - {{item?.category}}
+  </div>
+
+  <div class="col-12">
+    <b>price : </b>{{item?.price | currency}}
   </div>
 </div>

@@ -1,12 +1,19 @@
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {Book} from '../../model/book';
+
+const httpOptions = {
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class BooksService {
+
+  readonly booksUrl = 'localhost:3000';
+
   constructor(private http: HttpClient) {
   }
 
@@ -29,7 +36,13 @@ export class BooksService {
     return this.http.delete(`http://localhost:3000/books/${id}`);
   }
 
-  addBook(book: Partial<Book>): Observable<Book> {
-    return this.http.post<Book>('http://localhost:3000/books', book);
+  addBook(book: Book): Observable<Book> {
+    console.log(' item save or update ', book);
+    if (book.id) {
+      return this.http.patch<Book>(`http://localhost:3000/books/${book.id}`, book, httpOptions);
+    } else {
+      return this.http.post<Book>('http://localhost:3000/books', book, httpOptions);
+    }
   }
 }
+

@@ -48,7 +48,7 @@ export const loadBookFail = createAction(
 
 export const saveBook = createAction(
   ItemsActionTypes.SaveBook,
-  props<{ data: Partial<Book> }>()
+  props<{ data: Book }>()
 );
 
 export const saveBookSuccess = createAction(

@@ -1,38 +1,38 @@
 <form #f="ngForm" (ngSubmit)="saveHandler(f)" class="form-row">
 
   <div class="col-12 col-md-6 col-lg-4">
-    <input placeholder="Expense Description" type="text" name="title"
-           [ngModel]="book.title" class="form-control" required>
-  </div>
-
-  <div class="col-12 col-md-6 col-lg-4">
+    <span>Title :</span>
     <input placeholder="Title" type="text" name="title"
            [ngModel]="book.title" class="form-control" required>
   </div>
 
   <div class="col-12 col-md-6 col-lg-4">
+    <span>Description :</span>
     <input placeholder="Description" type="text" name="description"
            [ngModel]="book.description" class="form-control" required>
   </div>
 
   <div class="col-12 col-md-6 col-lg-4">
+    <span>Author :</span>
     <input placeholder="Author" type="text" name="author"
            [ngModel]="book.author" class="form-control" required>
   </div>
 
   <div class="col-12 col-md-6 col-lg-4">
+    <span>Category :</span>
     <input placeholder="Category" type="text" name="category"
            [ngModel]="book.category" class="form-control" required>
   </div>
 
   <div class="col-12 col-md-6 col-lg-4">
+    <span>Price :</span>
     <input placeholder="Price ($)" type="number" name="price"
            [ngModel]="book.price" class="form-control" required>
   </div>
 
   <div class="col-12 text-center py-3">
 
-    <button class="btn btn-primary" type="submit" [disabled]="f.invalid || !f.dirty">
+    <button class="btn btn-primary mx-5" type="submit" [disabled]="f.invalid || !f.dirty">
       SAVE
     </button>
 
@@ -40,7 +40,7 @@
       CLEAN
     </button>
 
-    <button class="btn btn-secondary" type="button" *ngIf="id" (click)="deleteBook(id)">
+    <button class="btn btn-secondary mx-5" type="button" *ngIf="id" (click)="deleteBook(id)">
       DELETE
     </button>
 

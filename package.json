@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "server": "json-server --watch server/db.json",
-    "serve": "http-server dist/ngrx-tutorials"
+    "serve": "http-server dist/frontendSpecialist"
   },
   "private": true,
   "dependencies": {

@@ -38,7 +38,10 @@ export class CrudComponent implements OnInit, OnDestroy {
     this.saveBook({...form.value});
   }
 
-  saveBook(book: Partial<Book>) {
+  saveBook(book: Book) {
+    if (this.id) {
+      book.id = this.id;
+    }
     this.store.dispatch(fromBookActions.saveBook({data: book}));
   }
 
