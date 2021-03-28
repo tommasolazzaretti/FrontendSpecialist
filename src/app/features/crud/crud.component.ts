@@ -3,9 +3,10 @@ import {Book} from '../../model/book';
 import {select, Store} from '@ngrx/store';
 import {AppState} from '../../app.module';
 import {FormGroup, NgForm} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {getBookById} from '../../store/selectors/books.selector';
 import {fromBookActions} from '../../store/actions/books.actions';
+import {toggleLoader} from '../../store/actions/ui.actions';
 
 @Component({
   selector: 'app-crud',
@@ -17,9 +18,8 @@ export class CrudComponent implements OnInit, OnDestroy {
   id: number = null;
   form: FormGroup;
   book: Book;
-  showModal: boolean;
 
-  constructor(private store: Store<AppState>, private route: ActivatedRoute) {
+  constructor(private store: Store<AppState>, private route: ActivatedRoute, private router: Router) {
     this.route.params.subscribe(params => {
       if (params.id) {
         this.id = params.id;
@@ -35,18 +35,32 @@ export class CrudComponent implements OnInit, OnDestroy {
   }
 
   saveHandler(form: NgForm) {
-    this.saveBook({...form.value});
+    this.store.dispatch(toggleLoader());
+    setTimeout(() => {
+      this.saveBook({...form.value});
+      this.store.dispatch(toggleLoader());
+    }, 1000);
   }
 
   saveBook(book: Book) {
     if (this.id) {
       book.id = this.id;
     }
-    this.store.dispatch(fromBookActions.saveBook({data: book}));
+    this.store.dispatch(toggleLoader());
+    setTimeout(() => {
+      this.store.dispatch(fromBookActions.saveBook({data: book}));
+      this.store.dispatch(toggleLoader());
+      this.router.navigate(['home']);
+    }, 1000);
   }
 
   deleteBook(id: number) {
-    this.store.dispatch(fromBookActions.deleteBook({id}));
+    this.store.dispatch(toggleLoader());
+    setTimeout(() => {
+      this.store.dispatch(fromBookActions.deleteBook({id}));
+      this.store.dispatch(toggleLoader());
+      this.router.navigate(['home']);
+    }, 1000);
   }
 
   ngOnDestroy(): void {

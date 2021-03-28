@@ -27,7 +27,7 @@ export class LoaderComponent implements OnInit {
   constructor(private store: Store<AppState>) {
 
     this.isLoading = this.store.pipe(
-      select((state: AppState) => state[BOOK_FEATURE_KEY].loaded)
+      select((state: AppState) => state.ui.isLoading)
     );
 
     this.isLoading.subscribe(data => console.log(data));

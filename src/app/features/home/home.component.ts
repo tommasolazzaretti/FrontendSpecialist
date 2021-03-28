@@ -52,26 +52,29 @@ export class HomeComponent implements OnInit {
   total$: Observable<number> = this.store.pipe(select(selectEntityCount));
   books$: Observable<Book[]> = this.store.pipe(select(selectAllBooks));
 
-  constructor(private store: Store<HomeState>, private route: Router) {
+  constructor(private store: Store<HomeState>, private router: Router) {
   }
 
   ngOnInit(): void {
-    // this.store.dispatch(toggleLoader());
-    this.store.dispatch(fromBookActions.loadBooks({}));
-    // this.store.dispatch(toggleLoader());
+    this.store.dispatch(toggleLoader());
 
     setTimeout(() => {
-      // this.store.dispatch(toggleLoader());
+      this.store.dispatch(fromBookActions.loadBooks({}));
+      this.store.dispatch(toggleLoader());
     }, 1000);
   }
 
   goTo(id: number) {
-    this.route.navigate(['crud/'.concat(String(id))]);
+    this.router.navigate(['crud/'.concat(String(id))]);
   }
 
   search(form: NgForm) {
     console.log('this.params ', form.value);
-    this.store.dispatch(fromBookActions.loadBooks({data: form.value}));
+    this.store.dispatch(toggleLoader());
+    setTimeout(() => {
+      this.store.dispatch(fromBookActions.loadBooks({data: form.value}));
+      this.store.dispatch(toggleLoader());
+    }, 1000);
   }
 
 }

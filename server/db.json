@@ -1,14 +1,6 @@
 {
   "books": [
     {
-      "title": "totilo 1",
-      "description": "1",
-      "author": "1",
-      "category": "1",
-      "price": 1,
-      "id": 1
-    },
-    {
       "title": "2",
       "description": "1",
       "author": "1",
