@@ -1,35 +1,43 @@
 {
   "books": [
     {
-      "title": "2",
-      "description": "1",
-      "author": "1",
-      "category": "1",
-      "price": 1,
+      "title": "Flora",
+      "description": "Flora di Alessandro Robecchi",
+      "author": "Alessandro Robecchi",
+      "category": "Giallo",
+      "price": 14.25,
+      "id": 1
+    },
+    {
+      "title": "La disciplina di Penelope",
+      "description": "La disciplina di Penelope di ",
+      "author": "Gianrico Carofiglio",
+      "category": "thriller",
+      "price": 15.68,
       "id": 2
     },
     {
-      "title": "123",
-      "description": "1",
-      "author": "1",
-      "category": "1",
-      "price": 1,
+      "title": "Sangue inquieto",
+      "description": "Sangue inquieto di ",
+      "author": "Robert Galbraith",
+      "category": "Giallo",
+      "price": 23.55,
       "id": 3
     },
     {
-      "title": "Title",
-      "description": "desc",
-      "author": "author",
-      "category": "categia fantasy",
-      "price": 123,
+      "title": "Later",
+      "description": "Later di Stephen King",
+      "author": "Stephen King",
+      "category": "Thriller",
+      "price": 18.90,
       "id": 4
     },
     {
-      "title": "nuovo",
-      "description": "nuovo",
-      "author": "nuovo",
-      "category": "nuovo",
-      "price": 123,
+      "title": "Gli occhi di Sara",
+      "description": "Gli occhi di Sara di Maurizio De Giovanni",
+      "author": "Maurizio De Giovanni",
+      "category": "Thriller",
+      "price": 18.05,
       "id": 5
     }
   ]
