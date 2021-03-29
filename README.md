@@ -1,27 +1,18 @@
 # FrontendSpecialist
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.5.
+Per il progetto ho deciso di adottare un'architettura con NgRX, per gestire lo stato applicativo, in quanto il mio credo è che ( visto anche il prolungato tempo di sviluppo utilizzando 
+la tecnologia in questione ) partendo da una struttura definita il tempo di sviluppo sarà notevolmente ridotto, in quanto avere una linea guida da seguire agevola e snellisce le attività di manutenzione e di 
+evoluzione dell'applicativo. 
+
+Per il layout responsive mi sono aiutato con bootstrap in modo da avere facilmente accesso a tutte le classi css per un layout mobile first fino a scalare sui monitor più grandi.
+
+Come base di appoggio dati ho usato un semplice db locale con json-server per le principali chiamate http, infatti ho simulato con un timeout i tmepi di reazione delle API perchè 
+se no sarebbero state di pochi millisecondi e non si sarebbe potuto verificare ad esempio il loader.
+
+Per la parte di testing, ho seguito quella che è la guida ufficiale google per angular, con i classici esempi base riportati
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+comando "start": "ng serve" per il server frontend
+comando "server": "json-server --watch server/db.json" per la istanza db locale
+comando "test": "ng test" per la parte di testing
