@@ -6,7 +6,7 @@ import {FormGroup, NgForm} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {getBookById} from '../../store/selectors/books.selector';
 import {fromBookActions} from '../../store/actions/books.actions';
-import {toggleLoader} from '../../store/actions/ui.actions';
+import {dirtyForm, toggleLoader, undirtyForm} from '../../store/actions/ui.actions';
 
 @Component({
   selector: 'app-crud',
@@ -32,6 +32,14 @@ export class CrudComponent implements OnInit, OnDestroy {
     this.store.pipe(select(getBookById())).subscribe(book => {
       this.book = book ? book : new Book();
     });
+
+    // this.form.valueChanges.subscribe(() => {
+    //   console.log(`Is form dirty?: ${this.form.dirty}`);
+    // });
+  }
+
+  onFormChange(form: NgForm) {
+    this.store.dispatch(form.dirty ? dirtyForm() : undirtyForm());
   }
 
   saveHandler(form: NgForm) {

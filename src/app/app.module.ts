@@ -12,10 +12,11 @@ import {LoaderComponent} from './global/components/loader/loader.component';
 import {BOOK_FEATURE_KEY} from './store/reducers/books.reducer';
 import {booksEffects} from './store/effects';
 import {CompositionGuard} from './global/guard/can-deactivate.guard';
+import {UiState} from './store/reducers/ui.reducer';
 
 export interface AppState {
   auth: { token: string, role: string };
-  ui: { isLoading: boolean };
+  ui: UiState;
   [BOOK_FEATURE_KEY]: any;
 }
 

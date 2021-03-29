@@ -1,4 +1,4 @@
-<form #f="ngForm" (ngSubmit)="saveHandler(f)" class="form-row">
+<form #f="ngForm" (change)="onFormChange(f)" (ngSubmit)="saveHandler(f)" class="form-row">
 
   <div class="col-12 col-md-6 col-lg-4">
     <span>Title :</span>
