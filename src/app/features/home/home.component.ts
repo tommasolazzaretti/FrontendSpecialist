@@ -19,29 +19,33 @@ class HomeState {
       <h1>DASHBOARD HOME-PAGE</h1>
       <div class="text-center">TOTAL BOOKS: {{total$ | async}}</div>
     </div>
-    <div class="mt-3 row">
+    <div class="m-3 row">
       <div class="col-12">
         <h3>Reaserch</h3>
       </div>
 
-      <form #f="ngForm" (ngSubmit)="search(f)" class="form-row">
-        <div class="col-12 col-md-6 col-lg-5">
-          <input placeholder="Search title" type="text"
-                 name="title" [ngModel] class="form-control" required>
-        </div>
-        <div class="col-12 col-md-6 col-lg-5">
-          <input placeholder="Search author" type="number"
-                 name="author" [ngModel] class="form-control" required>
-        </div>
-        <div class="col-12 col-lg-2">
-          <input type="submit" class="btn btn-primary" value="Seach"/>
-        </div>
-      </form>
-
+      <div class="col-12 p-0">
+        <form #f="ngForm" (ngSubmit)="search(f)" class="form-row">
+          <div class="col-12 col-md-6 col-lg-4">
+            <input placeholder="Search title" type="text"
+                   name="title" [ngModel] class="form-control" required>
+          </div>
+          <div class="col-12 col-md-6 col-lg-4">
+            <input placeholder="Search author" type="number"
+                   name="author" [ngModel] class="form-control" required>
+          </div>
+          <div class="col-12 col-lg-2">
+            <input type="submit" class="btn btn-primary" value="Seach"/>
+          </div>
+          <div class="col-12 col-lg-2">
+            <input type="submit" class="btn btn-secondary" (click)="goToCrud()" value="Insert New Book"/>
+          </div>
+        </form>
+      </div>
     </div>
     <div class="mt-5 row">
       <div *ngFor="let book of books$ | async" class="col-12 col-md-6 col-lg-4 px-5 py-3 p-md-3">
-        <app-item-card [item]="book" (click)="goTo(book.id)"></app-item-card>
+        <app-item-card [item]="book" (click)="goToCrud(book.id)"></app-item-card>
       </div>
     </div>
   `,
@@ -64,8 +68,8 @@ export class HomeComponent implements OnInit {
     }, 1000);
   }
 
-  goTo(id: number) {
-    this.router.navigate(['crud/'.concat(String(id))]);
+  goToCrud(id?: number) {
+    this.router.navigate([id ? 'crud' : 'crud/'.concat(String(id))]);
   }
 
   search(form: NgForm) {
